@@ -3,7 +3,7 @@
  */
 function signoZodiacal(fecha) {
     // Aries 21 de marzo - 20 de abril
-    let fecha1 = new Date(fecha.getFullYear(), 3-1, 21)
+    let fecha1 = new Date(fecha.getFullYear(), 3-1, 21) // crea nueva fecha en base al año de la fecha proporcionada
     //console.log(fecha1)
     let fecha2 = new Date(fecha.getFullYear(), 4-1, 20)
     if (fecha>=fecha1 && fecha<=fecha2) {
@@ -45,11 +45,11 @@ function signoZodiacal(fecha) {
                             if (fecha>=fecha1 && fecha<=fecha2) {
                                 return 'Libra'
                             } else {
-                                // Escorpio 23 de octubre - 22 de noviembre
+                                // Escorpión 23 de octubre - 22 de noviembre
                                 fecha1 = new Date(fecha.getFullYear(), 10-1, 23)
                                 fecha2 = new Date(fecha.getFullYear(), 11-1, 22)
                                 if (fecha>=fecha1 && fecha<=fecha2) {
-                                    return 'Escorpio'
+                                    return 'Escorpión'
                                 } else {
                                     // Sagitario 23 de noviembre - 21 de diciembre
                                     fecha1 = new Date(fecha.getFullYear(), 11-1, 23)
@@ -101,7 +101,7 @@ function signoZodiacal(fecha) {
  * @param {Date} fecha
  */
  function diaNacimiento(fecha) {
-    let diasNombre = ['domingo','lunes','martes','miercoles','jueves','viernes','sabado']
+    let diasNombre = ['domingo','lunes','martes','miércoles','jueves','viernes','sábado']
     let dn = fecha.getDay()
     return diasNombre[dn]
 }
@@ -110,51 +110,40 @@ function signoZodiacal(fecha) {
  * @param {Date} fecha
  */
 function diasVivo(fecha) {
-    let hoy = new Date()
-    return Math.floor((hoy-fecha) / (1000*60*60*24))
-    // return ((hoy-fecha) / (1000*60*60*24)).toFixed(2)
+    let hoy = new Date() // obtiene la fecha actual
+    return Math.floor((hoy-fecha) / (1000*60*60*24)) // muestra calculo con días enteros
+    // return ((hoy-fecha) / (1000*60*60*24)).toFixed(2) // opción para mostrar dos decimales
 }
 
 
 function obtenerDatos(fechaE = '') {
-    // console.clear()
-    let fecha
+    let fecha // se usa como principal la fecha proporcionada en el parámetro, para hacer pruebas en el código js sin depender del html
     if (fechaE === '') {
         fecha = document.getElementById('fechaInput').value
     } else {
         fecha = fechaE
     }
-    // console.log(fecha);
     
-    fecha1=fecha.replaceAll('-','/')
-    // console.log(fecha1)
-    
+    fecha1 = fecha.replaceAll('-','/') // se cambia signo para que utilice la zona horaria local (hay que investigar mas acerca de este tema)
     fecha2 = new Date(fecha1)
-    // console.log(fecha2)
-    
-    // fecha2= new Date(document.getElementById('fechaInput').value.replaceAll('-','/'))
     
     let resultado = document.getElementById('resultado')
     if (!isNaN(fecha2)) {
-        // console.log('Tu signo zodiacal es: ' + signoZodiacal(fecha2))
-        // console.log('Naciste un dia: ' + diaNacimiento(fecha2))
-        // console.log('Has vivido: ' + diasVivo(fecha2) + ' dias')
-        
         let dv = diasVivo(fecha2)
-        // console.log(fecha2);
-        
         if (dv >= 0) {
             resultado.innerHTML = '<br />Tu signo zodiacal es <b>' + signoZodiacal(fecha2) + '</b><br />'
             resultado.innerHTML += 'Naciste un dia <b>' + diaNacimiento(fecha2) + '</b><br />'
             resultado.innerHTML += 'Has vivido <b>' + dv + '</b> dias <br />'
             resultado.innerHTML += 'La fecha de hoy es ' + new Date().toLocaleDateString() + '<br />'
+
+            // // otras formas de obtener la fecha en formato local
             // resultado.innerHTML += 'La fecha de hoy es ' + new Intl.DateTimeFormat(['ban', 'es']).format() + '<br />'
             // resultado.innerHTML += 'La fecha de hoy es ' + new Intl.DateTimeFormat('es-GT').format() + '<br />'
         } else {
             resultado.innerHTML = 'Aun no has nacido!'
         }
     } else {
-        if (fecha === '') {
+        if (fecha === '') { // si no se proporciona fecha o el input de fecha esta vació
             resultado.innerHTML = ''
         } else {
             resultado.innerHTML = 'fecha invalida'
@@ -162,6 +151,7 @@ function obtenerDatos(fechaE = '') {
     }
 }
 
+// // para pruebas directas del código js
 // let fechaEvaluar = "2021/11/01";
 // let fecha = new Date(fechaEvaluar);
 // obtenerDatos(fechaEvaluar)
