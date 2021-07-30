@@ -103,33 +103,6 @@ function signoZodiacal(fecha) {
  function diaNacimiento(fecha) {
     let diasNombre = ['domingo','lunes','martes','miercoles','jueves','viernes','sabado']
     let dn = fecha.getDay()
-    if (false) {
-        switch (dn) {
-            case 0:
-                return('domingo')
-                break;
-            case 1:
-                return('lunes')
-                break;
-            case 2:
-                return('martes')
-                break;
-            case 3:
-                return('miercoles')
-                break;
-            case 4:
-                return('jueves')
-                break;
-            case 5:
-                return('viernes')
-                break;
-            case 6:
-                return('sabado')
-                break;                        
-            default:
-                break;
-        }   
-    }
     return diasNombre[dn]
 }
 
