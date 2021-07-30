@@ -111,8 +111,10 @@ function signoZodiacal(fecha) {
  */
 function diasVivo(fecha) {
     let hoy = new Date() // obtiene la fecha actual
-    return Math.floor((hoy-fecha) / (1000*60*60*24)) // muestra calculo con días enteros
-    // return ((hoy-fecha) / (1000*60*60*24)).toFixed(2) // opción para mostrar dos decimales
+    let diferencia = hoy - fecha // resultado en mili segundos
+    let dias = diferencia / (1000*60*60*24) // convertir de mili segundos a dias
+    return Math.floor(dias) // muestra calculo con días enteros
+    // return dias.toFixed(4) // opción para mostrar decimales
 }
 
 
